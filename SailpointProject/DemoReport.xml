@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE TaskDefinition PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<TaskDefinition executor="sailpoint.reporting.LiveReportExecutor" name="Demo Task Report" progressMode="String" resultAction="Rename" subType="Extended Reports" template="true" type="LiveReport">
+  <Attributes>
+    <Map>
+      <entry key="TaskDefinition.runLengthAverage" value="9"/>
+      <entry key="TaskDefinition.runLengthTotal" value="65"/>
+      <entry key="TaskDefinition.runs" value="7"/>
+      <entry key="disableDetail" value="false"/>
+      <entry key="disableSummary" value="false"/>
+      <entry key="prioritize" value="Task Definition"/>
+      <entry key="report">
+        <value>
+          <LiveReport title="Demo Task Report">
+            <DataSource dataSourceClass="sailpoint.reporting.reports.DemoTaskReport" type="Java"/>
+            <ReportForm>
+              <Reference class="sailpoint.object.Form" name="Demo Task Report Form"/>
+            </ReportForm>
+            <Columns>
+              <ReportColumnConfig field="name" header="Task Name" sortable="true" width="110"/>
+              <ReportColumnConfig field="type" header="Task Type" sortable="true" width="110"/>
+              <ReportColumnConfig field="created" header="Created Date" sortable="true" width="110"/>
+              <ReportColumnConfig field="status" header="Completion Status" sortable="true" width="110"/>
+              <ReportColumnConfig field="runlength" header="Run Time" sortable="true" width="110"/>
+              <ReportColumnConfig field="messages" header="Messages" sortable="true" width="110"/>
+            </Columns>
+          </LiveReport>
+        </value>
+      </entry>
+      <entry key="status" value="All"/>
+    </Map>
+  </Attributes>
+  <Description>Displays information regarding bulk request processes.</Description>
+  <RequiredRights>
+    <Reference class="sailpoint.object.SPRight" name="FullAccessBatchRequest"/>
+  </RequiredRights>
+  <Signature>
+    <Inputs>
+      <Argument name="tname" type="String">
+        <Description>rept_input_result_username</Description>
+      </Argument>
+      <Argument name="type" type="String">
+        <Description>rept_input_result_domain</Description>
+      </Argument>
+      <Argument name="resultScope" type="Scope">
+        <Description>rept_input_result_scope</Description>
+      </Argument>
+      <Argument name="prioritize" type="String">
+        <Description>rept_input_result_status</Description>
+      </Argument>
+      <Argument name="status" type="String">
+        <Description>rept_input_result_task_launcher</Description>
+      </Argument>
+      <Argument name="created" type="String">
+        <Description>date bulk request created</Description>
+      </Argument>
+    </Inputs>
+  </Signature>
+</TaskDefinition>
