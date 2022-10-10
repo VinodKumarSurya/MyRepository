@@ -1,49 +1,37 @@
 package sailpoint.reporting.reports;
 
+import java.io.Reader;
+import java.sql.Clob;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Clob;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Date;
-import java.sql.Timestamp;
-import java.io.BufferedReader;
-import java.io.Reader;
-import java.io.IOException;
-import java.lang.StringBuffer;
-
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRField;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.Logger;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRField;
 import sailpoint.api.SailPointContext;
-import sailpoint.object.Application;
 import sailpoint.object.Attributes;
-import sailpoint.object.WorkItem;
 import sailpoint.object.Custom;
-import sailpoint.object.Filter;
 import sailpoint.object.LiveReport;
-import sailpoint.object.ManagedAttribute;
 import sailpoint.object.QueryOptions;
 import sailpoint.object.Sort;
 import sailpoint.reporting.datasource.JavaDataSource;
 import sailpoint.task.Monitor;
 import sailpoint.tools.GeneralException;
 import sailpoint.tools.Util;
-import sailpoint.connector.JDBCConnector;
 
 
 public class DemoTaskReport implements JavaDataSource {
@@ -305,6 +293,7 @@ public class DemoTaskReport implements JavaDataSource {
            Connection connection = context.getJdbcConnection();
            System.out.println("Build stmt with sql: " + sql);
            PreparedStatement stmt = connection.prepareStatement(sql);
+           
            
      		// System.out.println("Sorted DB query options map : " + customQueryOptions);
     		 Map<String, Object> sortedDBQueryOptions = new TreeMap<String, Object>(customQueryOptions);

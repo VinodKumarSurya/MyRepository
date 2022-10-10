@@ -6,6 +6,12 @@ public class Helloword {
 		
 		System.out.println(" ********** the Hello Word ******* ");
 		
+		String name = "";
+		
+		if(name != null){
+			
+			System.out.println("Helloword.main()");
+		}
 		
 	
 	}
