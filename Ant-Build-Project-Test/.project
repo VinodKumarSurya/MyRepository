@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Ant-Build-Project-Test</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>bin</name>
+			<type>2</type>
+			<location>C:/Users/isury/Downloads/files/AntBuildProject/bin</location>
+		</link>
+		<link>
+			<name>build.xml</name>
+			<type>1</type>
+			<location>C:/Users/isury/Downloads/files/AntBuildProject/build.xml</location>
+		</link>
+		<link>
+			<name>src</name>
+			<type>2</type>
+			<location>C:/Users/isury/Downloads/files/AntBuildProject/src</location>
+		</link>
+	</linkedResources>
+</projectDescription>
