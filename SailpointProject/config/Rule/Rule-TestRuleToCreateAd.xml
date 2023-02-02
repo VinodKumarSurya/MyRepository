@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Test Rule to Create AD">
+	<Source><![CDATA[
+  import java.util.ArrayList;
+  import java.util.List;
+  import sailpoint.api.IdentityService;
+  import sailpoint.api.Provisioner;
+  import sailpoint.api.SailPointContext;
+  import sailpoint.object.Identity;
+  import sailpoint.object.Application;
+  import sailpoint.object.Link;
+  import sailpoint.object.ProvisioningPlan;
+  import sailpoint.api.IdentityService;
+  import sailpoint.object.ProvisioningPlan.AccountRequest;
+  import sailpoint.object.ProvisioningPlan.AttributeRequest;
+  import sailpoint.object.ProvisioningPlan.Operation;
+  import sailpoint.object.ProvisioningProject;
+  import sailpoint.object.ProvisioningResult;
+  import sailpoint.tools.GeneralException;
+  import sailpoint.tools.Message;
+  import sailpoint.tools.Util;
+  import sailpoint.object.ProvisioningPlan.Operation;
+
+  Identity idObject = context.getObject(Identity.class,"Kelly Wilson");
+  ProvisioningPlan planObj  = new ProvisioningPlan();
+  AccountRequest accountRequest=new AccountRequest();
+
+  if(idObject != null) {
+
+    String appName = "Active Directory";
+    Application applicationObject = context.getObject(Application.class, appName);
+    accountRequest.setApplication(appName);
+    String nativeIdentity = "CN="+idObject.getName()+",CN=Users,DC=seri,DC=sailpointdemo,DC=com";
+    accountRequest.setOperation(AccountRequest.Operation.Create);
+    accountRequest.setNativeIdentity(nativeIdentity);
+      accountRequest.add(new AttributeRequest("sAMAccountName",ProvisioningPlan.Operation.Add, idObject.getName()));
+     accountRequest.add(new AttributeRequest("givenName",ProvisioningPlan.Operation.Add, idObject.getFirstname()));
+     accountRequest.add(new AttributeRequest("sn",ProvisioningPlan.Operation.Add, idObject.getLastname())); 
+    accountRequest.add(new AttributeRequest("password",ProvisioningPlan.Operation.Set, "admin@123")); 
+    accountRequest.add(new AttributeRequest("memberOf",ProvisioningPlan.Operation.Add, "CN=BS,OU=Demo,DC=seri,DC=sailpointdemo,DC=com"));
+    accountRequest.add(new AttributeRequest("memberOf",ProvisioningPlan.Operation.Add, "CN=Guests,CN=Builtin,DC=seri,DC=sailpointdemo,DC=com"));
+
+
+
+    planObj.add(accountRequest);
+   planObj.setIdentity(idObject);
+
+
+    log.error("the before plan in rule :"+planObj.toXml());
+    Provisioner proObject=new Provisioner(context);
+    ProvisioningProject projectObject=proObject.compile(planObj);
+    proObject.execute(projectObject);
+
+    log.error("the provision Object value is;"+projectObject.getMasterPlan());
+    log.error("the project value is:"+projectObject.toXml());
+    return planObj.toXml();
+  }
+
+
+
+
+
+  ]]></Source>
+</Rule>

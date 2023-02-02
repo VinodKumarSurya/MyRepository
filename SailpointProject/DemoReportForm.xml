@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Form PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Form hidden="true" name="Demo Task Report Form" type="Report">
+  <Section columns="2" label="Request Parameters" name="customProperties">
+    <Field columnSpan="1" displayName="Task Name" helpKey="name" name="tname" type="string" value="ref:tname"/>
+    <Field columnSpan="1" displayName="Type" helpKey="type" name="type" type="string" value="ref:type"/>
+    <Field columnSpan="1" displayName="Completion Status" helpKey="status" name="status" type="string" value="ref:status">
+      <AllowedValues>
+        <String>Error</String>
+        <String>Warning</String>
+        <String>Success</String>
+        <String>All</String>
+      </AllowedValues>
+    </Field>
+    <Field columnSpan="1" displayName="Prioritize" helpKey="prioritize" name="prioritize" type="string" value="ref:prioritize">
+      <AllowedValues>
+        <String>Task Definition</String>
+        <String>Task Result</String>
+      </AllowedValues>
+    </Field>
+    <Field columnSpan="1" displayName="Created Date" helpKey="create_dt_start_use" name="created" type="string" value="ref:created">
+      <Attributes>
+        <Map>
+          <entry key="xtype" value="daterange"/>
+        </Map>
+      </Attributes>
+    </Field>
+  </Section>
+</Form>
